@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import GlobalStyles from './Global.styles';
-import { Header, Table } from './components';
+import { Header, Table, Search } from './components';
 import Api from './services/Api.service';
 
+interface Data {
+    results: any[];
+    filteredResults: any[];
+}
 const App = () => {
     const [pagination, setPagination] = useState({ totalPages: 0, currentPage: 0 });
-    const [results, setResults] = useState<any[]>([]);
+    const [data, setData] = useState<Data>({ results: [], filteredResults: [] });
+
     useEffect(() => {
         Api.getTotalCoins().then((res) => {
             if (typeof res === 'string') {
@@ -20,21 +25,20 @@ const App = () => {
                 console.log('error');
                 return null;
             }
-            setResults(res);
+            setData({ results: res, filteredResults: res });
             return null;
         });
     }, []);
-    useEffect(() => {
-        console.log(pagination);
-        console.log(results);
-    }, [pagination, results]);
-
+    const handleResults = (filtered: any[]) => {
+        setData((prev) => ({ ...prev, filteredResults: filtered }));
+    };
     return (
         <>
             <GlobalStyles />
             <Header />
+            <Search results={data.results} setResults={handleResults} />
             <div>
-                <Table results={results} loading={false} />
+                <Table display={data.filteredResults} loading={false} />
             </div>
         </>
     );

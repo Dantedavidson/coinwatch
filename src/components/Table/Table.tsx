@@ -11,10 +11,10 @@ import Utlity from '../../utility';
 import * as S from './Table.styles';
 
 interface Props {
-    results: any[];
+    display: any[];
     loading: boolean;
 }
-const Table = ({ results, loading }: Props) => {
+const Table = ({ display, loading }: Props) => {
     return (
         <S.TableContainer>
             <MUITable size="small" aria-label="a dense table">
@@ -33,7 +33,7 @@ const Table = ({ results, loading }: Props) => {
                 </TableHead>
                 {!loading && (
                     <TableBody>
-                        {results.map((result) => {
+                        {display.map((result) => {
                             return (
                                 <TableRow
                                     key={result?.id}
