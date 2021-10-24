@@ -11,4 +11,11 @@ export default createGlobalStyle`
 body {
   background-color: #182039;
 }
+
+.MuiTableCell-root{
+ && {  
+   font-size:11px;
+   color:#fff;
+  }
+}
 `;
