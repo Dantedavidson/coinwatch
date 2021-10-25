@@ -10,7 +10,7 @@ const Container = styled.div`
 const Header = () => {
     return (
         <Container>
-            <img src={Logo} alt="Caleb and Brown company logo" />
+            <img src={Logo} alt="Caleb and Brown company logo" width={200} />
         </Container>
     );
 };

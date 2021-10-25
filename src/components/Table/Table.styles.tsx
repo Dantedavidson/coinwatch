@@ -2,14 +2,10 @@ import styled from 'styled-components';
 import MUITableCell from '@mui/material/TableCell';
 import MUITableContainer from '@mui/material/TableContainer';
 
-export const TableCell = styled(MUITableCell)``;
-
 export const TableContainer = styled(MUITableContainer)`
     && {
         background-color: '#182039';
-        width: 90%;
         max-height: 80vh;
-        margin: auto;
         padding: 1;
 
         &::-webkit-scrollbar {
@@ -27,6 +23,8 @@ export const TableContainer = styled(MUITableContainer)`
         }
     }
 `;
+
+export const TableCell = styled(MUITableCell)``;
 
 export const Flex = styled.div`
     display: flex;

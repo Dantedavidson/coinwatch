@@ -9,7 +9,7 @@ type BasicCoinInfo = {
 export default {
     async getTotalCoins(): Promise<BasicCoinInfo[] | string> {
         try {
-            const res = await axios.get('https://api.coingecko.com/api/v3/coins/list');
+            const res = await axios.get('coins/list');
             if (Array.isArray(res.data)) {
                 return res.data;
             }
@@ -23,13 +23,14 @@ export default {
     async getMarketInfo(page: number) {
         try {
             const res = await axios.get(
-                `https://api.coingecko.com/api/v3/coins/markets?vs_currency=aud&order=market_cap_desc&per_page=100&page=${page}&sparkline=false`,
+                `coins/markets?vs_currency=aud&order=market_cap_desc&per_page=100&page=${page}&sparkline=false`,
                 {
                     params: {
                         sparkline: true,
                     },
                 },
             );
+            console.log(res);
             if (Array.isArray(res.data)) {
                 return res.data;
             }

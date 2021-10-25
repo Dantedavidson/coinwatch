@@ -19,6 +19,11 @@ body {
   }
 }
 
+.MuiPaginationItem-root.MuiPaginationItem-sizeMedium.MuiPaginationItem-text {
+            color: #fff;
+        }
+    
+
 button,
 input,
 optgroup,

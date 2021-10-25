@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { DateTime } from 'luxon';
 import { VictoryLine } from 'victory';
 import { CircularProgress } from '@mui/material';
@@ -6,7 +6,6 @@ import MUITable from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Utlity from '../../utility';
 import * as S from './Table.styles';
 
@@ -34,52 +33,60 @@ const Table = ({ display, loading }: Props) => {
                 {!loading && (
                     <TableBody>
                         {display.map((result) => {
+                            const {
+                                id,
+                                image,
+                                name,
+                                symbol,
+                                current_price: currentPrice,
+                                price_change_24h: priceChange24h,
+                                price_change_percentage_24h: priceChangePercentage24h,
+                                market_cap: marketCap,
+                                total_volume: totalVolume,
+                                circulating_supply: circulatingSupply,
+                                sparkline_in_7d: { price },
+                            } = result;
                             return (
                                 <TableRow
-                                    key={result?.id}
+                                    key={id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <S.TableCell>
                                         <S.Flex>
-                                            <img
-                                                src={result?.image}
-                                                alt={`${result?.name} logo`}
-                                                height={16}
-                                                width={16}
-                                            />
-                                            {result.symbol}
+                                            {image && (
+                                                <img
+                                                    src={image}
+                                                    alt={`${name} logo`}
+                                                    height={16}
+                                                    width={16}
+                                                />
+                                            )}
+                                            {symbol}
                                         </S.Flex>
                                     </S.TableCell>
-                                    <S.TableCell align="right">{result?.name}</S.TableCell>
-                                    <S.TableCell align="right">{result?.current_price}</S.TableCell>
+                                    <S.TableCell align="right">{name}</S.TableCell>
+                                    <S.TableCell align="right">{currentPrice}</S.TableCell>
+                                    <S.TableCell align="right">{priceChange24h}</S.TableCell>
                                     <S.TableCell align="right">
-                                        {result?.price_change_24h}
+                                        {priceChangePercentage24h}
                                     </S.TableCell>
-                                    <S.TableCell align="right">
-                                        {result?.price_change_percentage_24h}
-                                    </S.TableCell>
-                                    <S.TableCell align="right">{result?.market_cap}</S.TableCell>
-                                    <S.TableCell align="right">{result?.total_volume}</S.TableCell>
-                                    <S.TableCell align="right">
-                                        {result?.circulating_supply}
-                                    </S.TableCell>
+                                    <S.TableCell align="right">{marketCap}</S.TableCell>
+                                    <S.TableCell align="right">{totalVolume}</S.TableCell>
+                                    <S.TableCell align="right">{circulatingSupply}</S.TableCell>
                                     <S.TableCell align="right" sx={{ maxWidth: 100 }}>
-                                        <VictoryLine
-                                            data={Utlity.formatSparkline(
-                                                result.sparkline_in_7d.price,
-                                            )}
-                                            style={{
-                                                data: {
-                                                    stroke:
-                                                        result.sparkline_in_7d.price[0] >=
-                                                        result.sparkline_in_7d.price[
-                                                            result.sparkline_in_7d.price.length - 1
-                                                        ]
-                                                            ? 'red'
-                                                            : 'green',
-                                                },
-                                            }}
-                                        />
+                                        {price.length > 0 && (
+                                            <VictoryLine
+                                                data={Utlity.formatSparkline(price)}
+                                                style={{
+                                                    data: {
+                                                        stroke:
+                                                            price[0] >= price[price.length - 1]
+                                                                ? 'red'
+                                                                : 'green',
+                                                    },
+                                                }}
+                                            />
+                                        )}
                                     </S.TableCell>
                                 </TableRow>
                             );
