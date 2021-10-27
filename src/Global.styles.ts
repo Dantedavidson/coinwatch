@@ -19,9 +19,13 @@ body {
   }
 }
 
+.MuiTypography-root{
+  color:inherit;
+}
+
 .MuiPaginationItem-root.MuiPaginationItem-sizeMedium.MuiPaginationItem-text {
-            color: #fff;
-        }
+  color: #fff;
+}
     
 
 button,
@@ -37,10 +41,10 @@ input[type="radio"], input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button, input[type="search"], input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration{
   border:none;
-    background-image:none;
-    background-color:transparent;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+  background-image:none;
+  background-color:transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 `;

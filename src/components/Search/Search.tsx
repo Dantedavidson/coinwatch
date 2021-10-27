@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
 
 const Input = styled.input`
     padding: 2px;
+    margin-bottom: 1.5rem;
     border: 0 transparent;
     border-radius: 2px;
     outline: none;

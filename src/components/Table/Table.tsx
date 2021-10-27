@@ -1,5 +1,4 @@
 import React from 'react';
-import { DateTime } from 'luxon';
 import { VictoryLine } from 'victory';
 import { CircularProgress } from '@mui/material';
 import MUITable from '@mui/material/Table';
@@ -31,8 +30,8 @@ const Table = ({ display, loading }: Props) => {
                     </TableRow>
                 </TableHead>
                 {!loading && (
-                    <TableBody>
-                        {display.map((result) => {
+                    <TableBody data-testid="tbody">
+                        {display.map((result, index) => {
                             const {
                                 id,
                                 image,
@@ -44,12 +43,13 @@ const Table = ({ display, loading }: Props) => {
                                 market_cap: marketCap,
                                 total_volume: totalVolume,
                                 circulating_supply: circulatingSupply,
-                                sparkline_in_7d: { price },
+                                sparkline_in_7d: { price = '' } = {},
                             } = result;
                             return (
                                 <TableRow
-                                    key={id}
+                                    key={id || index}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    data-testid="tbody-row"
                                 >
                                     <S.TableCell>
                                         <S.Flex>
@@ -65,14 +65,20 @@ const Table = ({ display, loading }: Props) => {
                                         </S.Flex>
                                     </S.TableCell>
                                     <S.TableCell align="right">{name}</S.TableCell>
-                                    <S.TableCell align="right">{currentPrice}</S.TableCell>
+                                    <S.TableCell align="right">{`$${currentPrice}`}</S.TableCell>
                                     <S.TableCell align="right">{priceChange24h}</S.TableCell>
                                     <S.TableCell align="right">
                                         {priceChangePercentage24h}
                                     </S.TableCell>
-                                    <S.TableCell align="right">{marketCap}</S.TableCell>
-                                    <S.TableCell align="right">{totalVolume}</S.TableCell>
-                                    <S.TableCell align="right">{circulatingSupply}</S.TableCell>
+                                    <S.TableCell align="right">
+                                        {new Intl.NumberFormat().format(marketCap)}
+                                    </S.TableCell>
+                                    <S.TableCell align="right">
+                                        {new Intl.NumberFormat().format(totalVolume)}
+                                    </S.TableCell>
+                                    <S.TableCell align="right">
+                                        {new Intl.NumberFormat().format(circulatingSupply)}
+                                    </S.TableCell>
                                     <S.TableCell align="right" sx={{ maxWidth: 100 }}>
                                         {price.length > 0 && (
                                             <VictoryLine
@@ -95,7 +101,7 @@ const Table = ({ display, loading }: Props) => {
                 )}
             </MUITable>
             {loading && (
-                <S.LoadingContainer>
+                <S.LoadingContainer data-testid="loader">
                     <CircularProgress />
                 </S.LoadingContainer>
             )}

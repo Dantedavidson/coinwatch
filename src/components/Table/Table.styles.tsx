@@ -5,7 +5,8 @@ import MUITableContainer from '@mui/material/TableContainer';
 export const TableContainer = styled(MUITableContainer)`
     && {
         background-color: '#182039';
-        max-height: 80vh;
+        max-height: 70vh;
+        margin-bottom: 1rem;
         padding: 1;
 
         &::-webkit-scrollbar {

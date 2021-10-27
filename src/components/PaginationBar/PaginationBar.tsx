@@ -1,21 +1,6 @@
 import React from 'react';
-import MUIPagination from '@mui/material/Pagination';
-import styled from 'styled-components';
+import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-
-const Pagination = styled(MUIPagination)`
-    /* && {
-        .MuiPaginationItem-root
-            .MuiPaginationItem-sizeMedium
-            .MuiPaginationItem-text
-            .MuiPaginationItem-rounded
-            .MuiPaginationItem-textPrimary
-            .MuiPaginationItem-ellipsis
-            .css-1v2lvtn-MuiPaginationItem-root {
-            color: #fff;
-        }
-    } */
-`;
 
 interface Props {
     count: number;

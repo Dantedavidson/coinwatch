@@ -25,7 +25,7 @@ export default {
     async getMarketInfo(page: number, sortBy: SortQuery) {
         try {
             const res = await axios.get(
-                `coins!/markets?vs_currency=aud&order=market_cap_desc&per_page=100&page=${page}&sparkline=false`,
+                `coins/markets?vs_currency=aud&order=market_cap_desc&per_page=100&page=${page}&sparkline=false`,
                 {
                     params: {
                         order: sortBy,

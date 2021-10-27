@@ -1,7 +1,6 @@
 import React from 'react';
 import { Typography, Button } from '@mui/material';
 import styled from 'styled-components';
-import { Data } from '../../App';
 
 const Container = styled.div`
     display: flex;
@@ -10,7 +9,7 @@ const Container = styled.div`
     height: 90vh;
 `;
 interface Props {
-    onClickHandler: React.Dispatch<React.SetStateAction<Data>>;
+    onClickHandler: () => Promise<void>;
 }
 const ErrorTab = ({ onClickHandler }: Props) => {
     return (
@@ -21,7 +20,7 @@ const ErrorTab = ({ onClickHandler }: Props) => {
             <Button
                 variant="outlined"
                 sx={{ color: '#fff', borderColor: '#fff' }}
-                onClick={() => onClickHandler((prev) => ({ ...prev, error: false }))}
+                onClick={onClickHandler}
             >
                 Try Again
             </Button>
