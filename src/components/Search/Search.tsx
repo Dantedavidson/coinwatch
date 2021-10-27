@@ -8,6 +8,7 @@ interface Props {
 
 const Input = styled.input`
     padding: 2px;
+    width: 15rem;
     margin-bottom: 1.5rem;
     border: 0 transparent;
     border-radius: 2px;
